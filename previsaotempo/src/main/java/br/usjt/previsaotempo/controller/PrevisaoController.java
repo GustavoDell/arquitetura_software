@@ -1,0 +1,33 @@
+package br.usjt.previsaotempo.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import br.usjt.previsaotempo.model.Previsao;
+import br.usjt.previsaotempo.repository.PrevisaoRepository;
+
+@Controller
+public class PrevisaoController {	
+	
+	//Injeção de dependência 
+	@Autowired
+	private PrevisaoRepository previsaoRepo;
+		
+		@GetMapping ("/previsao")
+		public ModelAndView listarPrevisao () {
+			
+			ModelAndView mv = new ModelAndView ("lista_previsao");
+			
+			List <Previsao> previsaotemp = previsaoRepo.findAll();
+			
+			mv.addObject("previsaotemp", previsaotemp);
+			
+			return mv;		
+
+		}
+
+}
