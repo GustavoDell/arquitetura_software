@@ -16,6 +16,10 @@ public class Previsao implements Serializable{
 	private double maxima;
 	private double relativa;
 	private String descricao;
+	private double data;
+	private double hora;
+	private double latitude;
+	private double longitude;
 	public Long getId() {
 		return Id;
 	}
@@ -51,6 +55,30 @@ public class Previsao implements Serializable{
 	}
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+	public double getData() {
+		return data;
+	}
+	public void setData(double data) {
+		this.data = data;
+	}
+	public double getHora() {
+		return hora;
+	}
+	public void setHora(double hora) {
+		this.hora = hora;
+	}
+	public double getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+	public double getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;

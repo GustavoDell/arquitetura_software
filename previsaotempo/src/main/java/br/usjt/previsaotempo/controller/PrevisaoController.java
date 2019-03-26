@@ -9,20 +9,23 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.usjt.previsaotempo.model.Previsao;
 import br.usjt.previsaotempo.repository.PrevisaoRepository;
+import br.usjt.previsaotempo.sevice.PrevisaoService;
 
 @Controller
 public class PrevisaoController {	
-	
 	//Injeção de dependência 
+	//@Autowired
+	//private PrevisaoRepository previsaoRepo;
+	
 	@Autowired
-	private PrevisaoRepository previsaoRepo;
+	private PrevisaoService previsaoService;
 		
 		@GetMapping ("/previsao")
 		public ModelAndView listarPrevisao () {
 			
 			ModelAndView mv = new ModelAndView ("lista_previsao");
 			
-			List <Previsao> previsaotemp = previsaoRepo.findAll();
+			List <Previsao> previsaotemp = previsaoService.ListarTodos();
 			
 			mv.addObject("previsaotemp", previsaotemp);
 			
