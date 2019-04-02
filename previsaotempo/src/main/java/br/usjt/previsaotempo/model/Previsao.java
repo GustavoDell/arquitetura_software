@@ -2,6 +2,8 @@ package br.usjt.previsaotempo.model;
 
 import java.io.Serializable;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Entity;
 
@@ -11,7 +13,6 @@ public class Previsao implements Serializable{
 	@Id
 	@GeneratedValue
 	private Long Id;
-	private String semana;
 	private double minima;
 	private double maxima;
 	private double relativa;
@@ -20,17 +21,15 @@ public class Previsao implements Serializable{
 	private double hora;
 	private double latitude;
 	private double longitude;
+	@OneToOne(optional = false)
+	@JoinColumn(name = "id_do_dia_da_semana")
+	private DiasDaSemana diasDaSemana;
+	
 	public Long getId() {
 		return Id;
 	}
 	public void setId(Long id) {
 		Id = id;
-	}
-	public String getSemana() {
-		return semana;
-	}
-	public void setSemana(String semana) {
-		this.semana = semana;
 	}
 	public double getMinima() {
 		return minima;
@@ -83,4 +82,75 @@ public class Previsao implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	public DiasDaSemana getDiasDaSemana() {
+		return diasDaSemana;
+	}
+	public void setDiasDaSemana(DiasDaSemana diasDaSemana) {
+		this.diasDaSemana = diasDaSemana;
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((diasDaSemana == null) ? 0 : diasDaSemana.hashCode());
+		result = prime * result + ((Id == null) ? 0 : Id.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(data);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
+		temp = Double.doubleToLongBits(hora);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(latitude);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(longitude);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(maxima);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(minima);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(relativa);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Previsao other = (Previsao) obj;
+		if (diasDaSemana == null) {
+			if (other.diasDaSemana != null)
+				return false;
+		} else if (!diasDaSemana.equals(other.diasDaSemana))
+			return false;
+		if (Id == null) {
+			if (other.Id != null)
+				return false;
+		} else if (!Id.equals(other.Id))
+			return false;
+		if (Double.doubleToLongBits(data) != Double.doubleToLongBits(other.data))
+			return false;
+		if (descricao == null) {
+			if (other.descricao != null)
+				return false;
+		} else if (!descricao.equals(other.descricao))
+			return false;
+		if (Double.doubleToLongBits(hora) != Double.doubleToLongBits(other.hora))
+			return false;
+		if (Double.doubleToLongBits(latitude) != Double.doubleToLongBits(other.latitude))
+			return false;
+		if (Double.doubleToLongBits(longitude) != Double.doubleToLongBits(other.longitude))
+			return false;
+		if (Double.doubleToLongBits(maxima) != Double.doubleToLongBits(other.maxima))
+			return false;
+		if (Double.doubleToLongBits(minima) != Double.doubleToLongBits(other.minima))
+			return false;
+		if (Double.doubleToLongBits(relativa) != Double.doubleToLongBits(other.relativa))
+			return false;
+		return true;
+	}
+	
 }
