@@ -4,10 +4,13 @@ import java.io.Serializable;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Entity;
+import br.usjt.previsaotempo.model.DiasDaSemana;
 
 @Entity
+@Table
 public class Previsao implements Serializable{
 	public static final long serialVersionUID = 1L;
 	@Id
@@ -22,9 +25,8 @@ public class Previsao implements Serializable{
 	private double latitude;
 	private double longitude;
 	@OneToOne(optional = false)
-	@JoinColumn(name = "id_do_dia_da_semana")
+	@JoinColumn(name = "tb_dia_da_semana")
 	private DiasDaSemana diasDaSemana;
-	
 	public Long getId() {
 		return Id;
 	}
@@ -79,9 +81,6 @@ public class Previsao implements Serializable{
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
 	public DiasDaSemana getDiasDaSemana() {
 		return diasDaSemana;
 	}
@@ -92,24 +91,7 @@ public class Previsao implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((diasDaSemana == null) ? 0 : diasDaSemana.hashCode());
 		result = prime * result + ((Id == null) ? 0 : Id.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(data);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
-		temp = Double.doubleToLongBits(hora);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(latitude);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(longitude);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(maxima);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(minima);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(relativa);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
 	@Override
@@ -121,36 +103,20 @@ public class Previsao implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Previsao other = (Previsao) obj;
-		if (diasDaSemana == null) {
-			if (other.diasDaSemana != null)
-				return false;
-		} else if (!diasDaSemana.equals(other.diasDaSemana))
-			return false;
 		if (Id == null) {
 			if (other.Id != null)
 				return false;
 		} else if (!Id.equals(other.Id))
 			return false;
-		if (Double.doubleToLongBits(data) != Double.doubleToLongBits(other.data))
-			return false;
-		if (descricao == null) {
-			if (other.descricao != null)
-				return false;
-		} else if (!descricao.equals(other.descricao))
-			return false;
-		if (Double.doubleToLongBits(hora) != Double.doubleToLongBits(other.hora))
-			return false;
-		if (Double.doubleToLongBits(latitude) != Double.doubleToLongBits(other.latitude))
-			return false;
-		if (Double.doubleToLongBits(longitude) != Double.doubleToLongBits(other.longitude))
-			return false;
-		if (Double.doubleToLongBits(maxima) != Double.doubleToLongBits(other.maxima))
-			return false;
-		if (Double.doubleToLongBits(minima) != Double.doubleToLongBits(other.minima))
-			return false;
-		if (Double.doubleToLongBits(relativa) != Double.doubleToLongBits(other.relativa))
-			return false;
 		return true;
 	}
+	
+	@Override
+	public String toString() {
+		return "Previsao [Id=" + Id + ", minima=" + minima + ", maxima=" + maxima + ", relativa=" + relativa
+				+ ", descricao=" + descricao + ", data=" + data + ", hora=" + hora + ", latitude=" + latitude
+				+ ", longitude=" + longitude + ", diasDaSemana=" + diasDaSemana + "]";
+	}
+	
 	
 }

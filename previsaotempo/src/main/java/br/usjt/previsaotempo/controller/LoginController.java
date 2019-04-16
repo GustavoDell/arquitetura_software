@@ -13,6 +13,7 @@ import br.usjt.previsaotempo.sevice.LoginService;
 public class LoginController {
 	@Autowired
 	private LoginService loginService;
+	
 	@GetMapping(value = {"/login", "/"})
 	public ModelAndView login () {
 		ModelAndView mv = new ModelAndView("login");
